@@ -64,16 +64,16 @@ public class OrderList {
         String receiptNumber = String.format("%.0f", Math.floor(Math.random() * (999 - 100 + 1) + 100));
         PrintWriter outputfile = new PrintWriter("Receipt.txt");
         outputfile.println("You have " + orderList.size() + " items in your shopping cart.");
-        System.out.println("You have " + orderList.size() + " items in your shopping cart.");
-        System.out.println("Your order number is: " + receiptNumber);
+        //System.out.println("You have " + orderList.size() + " items in your shopping cart.");
+        //System.out.println("Your order number is: " + receiptNumber);
         outputfile.println("Your order number is: " + receiptNumber);
         for (int i = 0; i < orderList.size(); i++) {
             outputfile.println((i + 1) + ". " + orderList.get(i));
-            System.out.println((i + 1) + ". " + orderList.get(i)); //retrieves the list of items in the array list.
+            //System.out.println((i + 1) + ". " + orderList.get(i)); //retrieves the list of items in the array list.
 
         }
         outputfile.println("The total price of your order is:  $" + String.format("%.2f", totalPrice()*1.06));
-        System.out.println("The total price of your order is:  $" + String.format("%.2f", totalPrice()*1.06));
+        //System.out.println("The total price of your order is:  $" + String.format("%.2f", totalPrice()*1.06));
         outputfile.close();
     }
 
