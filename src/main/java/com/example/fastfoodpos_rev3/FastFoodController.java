@@ -18,16 +18,21 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 public class FastFoodController implements Initializable {
     private static OrderList menuList = new OrderList();
-
+    public Button btnClose;
 
     /**
      * Populates the contents from item and price ArrayLists
@@ -36,6 +41,12 @@ public class FastFoodController implements Initializable {
     protected ListView lvOrderList = new ListView();
     @FXML
     protected ListView lvOrderPrice = new ListView();
+
+    /**
+     * Creates text area for receipt.txt file to be populated
+     */
+    @FXML
+    protected TextArea receiptTextArea;
 
 
     /** Generates properties for the ListView
@@ -110,8 +121,15 @@ public class FastFoodController implements Initializable {
 
     public void btnCheckOut (ActionEvent e) throws IOException {  //Completes the customers order
         menuList.printOrderList();  //prints completed order to console.
-        Platform.exit();
 
+
+        Parent root = FXMLLoader.load(getClass().getResource("receipt.fxml"));
+
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setTitle("Receipt");
+        stage.setScene(scene);
+        stage.show();
 
     }
 
@@ -133,6 +151,10 @@ public class FastFoodController implements Initializable {
 
     }
 
+    public void btnClose(ActionEvent event) {
+        Platform.exit();
+    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -141,6 +163,21 @@ public class FastFoodController implements Initializable {
         lvOrderList.itemsProperty().bind(listProperty);  //displays item in list on the user interface
         lvOrderPrice.itemsProperty().bind(listPrice);  //displays price of item in list on the user interface
 
+
+        try {
+            // Create a buffered stream
+            Scanner input = new Scanner(new File("Receipt.txt"));
+
+            // Read a line and append the line to the text area
+            while (input.hasNext()) {
+                receiptTextArea.appendText(input.nextLine() + '\n');
+            }
+            input.close();
+        } catch (FileNotFoundException ex) {
+            System.out.println("File not found: " + "Receipt.txt");
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
 
     }
 
