@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="498.0" prefWidth="546.0" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.fastfoodpos_rev3.FastFoodController">
+    <children>
+        <TextArea fx:id="aboutTextArea" editable="false" layoutX="19.0" layoutY="95.0" prefHeight="313.0" prefWidth="502.0" text= "This is a self service kiosk designed for restaurant customers to place their own orders. When the customer presses the checkout button, the total price of the order including the sales tax will populate, prompting the user for payment." wrapText="true" />
+        <TextArea fx:id="welcomeAddress" editable="false" layoutX="20.0" layoutY="14.0" prefHeight="25.0" prefWidth="502.0" text="           Welcome to Something Restaurant!" wrapText="true" AnchorPane.topAnchor="14.0">
+            <font>
+                <Font name="Berlin Sans FB" size="24.0" />
+            </font>
+        </TextArea>
+        <Button fx:id="btnWelcomeClose" layoutX="202.0" layoutY="432.0" mnemonicParsing="false" onAction="#btnWelcomeClose" prefHeight="38.0" prefWidth="136.0" text="Close" />
+    </children>
+</AnchorPane>

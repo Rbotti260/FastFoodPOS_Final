@@ -1,0 +1,6 @@
+You have 3 items in your shopping cart.
+Your order number is: 135
+1. Hamburger
+2. Chicken Tenders
+3. Cheese Steak
+The total price of your order is:  $29.42

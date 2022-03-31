@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="515.0" prefWidth="539.0" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.zzzfastfood_test4.FastFoodController">
+   <children>
+      <TextArea fx:id="receiptTextArea" editable="false" layoutX="19.0" layoutY="95.0" prefHeight="313.0" prefWidth="502.0" />
+      <TextArea fx:id="receiptAddress" editable="false" layoutX="20.0" layoutY="14.0" prefHeight="25.0" prefWidth="502.0" text="Thank you for dining at Something Restaurant!" wrapText="true" AnchorPane.topAnchor="14.0">
+         <font>
+            <Font name="Berlin Sans FB" size="24.0" />
+         </font>
+      </TextArea>
+      <Button fx:id="btnClose" layoutX="202.0" layoutY="432.0" mnemonicParsing="false" onAction="#btnClose" prefHeight="38.0" prefWidth="136.0" text="Close" />
+   </children>
+</AnchorPane>
