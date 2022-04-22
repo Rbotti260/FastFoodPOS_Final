@@ -31,7 +31,7 @@ public class HelloApplication extends Application {
 
 
     public static void main(String[] args) {
-        //Help.about();
+        //Help.about();  // moved to separate window of application
         launch();
     }
 }

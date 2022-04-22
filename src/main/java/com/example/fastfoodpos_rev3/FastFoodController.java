@@ -18,16 +18,21 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 public class FastFoodController implements Initializable {
     private static OrderList menuList = new OrderList();
-
+    public Button btnClose;
 
     /**
      * Populates the contents from item and price ArrayLists
@@ -36,6 +41,12 @@ public class FastFoodController implements Initializable {
     protected ListView lvOrderList = new ListView();
     @FXML
     protected ListView lvOrderPrice = new ListView();
+
+    /**
+     * Creates text area for receipt.txt file to be populated
+     */
+    @FXML
+    protected TextArea receiptTextArea;
 
 
     /** Generates properties for the ListView
@@ -57,7 +68,7 @@ public class FastFoodController implements Initializable {
         menuList.addOrderItem("Hamburger");  //adds item to ArrayList
         menuList.addOrderPrice(8.50);  //adds price to ArrayList
         menuList.addComboNumber(1);  //adds item number to ArrayList
-        System.out.println("Hamburger");  //prints item to console
+        //System.out.println("Hamburger");  //prints item to console.  Now outputs to User Interface
         listProperty.set(FXCollections.observableArrayList(menuList.orderList)); //populates item in listview
         listPrice.set(FXCollections.observableArrayList(menuList.orderPrice));   //populates price of item in listview
     }
@@ -66,7 +77,7 @@ public class FastFoodController implements Initializable {
         menuList.addOrderItem("Chicken Tenders");  //adds item to ArrayList
         menuList.addOrderPrice(9.00);  //adds price to ArrayList
         menuList.addComboNumber(2);  //adds item number to ArrayList
-        System.out.println("Chicken Tenders");  //prints item to console
+        //System.out.println("Chicken Tenders");  //prints item to console.  Now outputs to User Interface
         listProperty.set(FXCollections.observableArrayList(menuList.orderList));  //populates item in listview
         listPrice.set(FXCollections.observableArrayList(menuList.orderPrice));  //populates price of item in listview
     }
@@ -75,7 +86,7 @@ public class FastFoodController implements Initializable {
         menuList.addOrderItem("Hot Dog");  //adds item to ArrayList
         menuList.addOrderPrice(6.00);  //adds price to ArrayList
         menuList.addComboNumber(3);  //adds item number to ArrayList
-        System.out.println("Hot Dog");  //prints item to console
+        //System.out.println("Hot Dog");  //prints item to console.  Now outputs to User Interface
         listProperty.set(FXCollections.observableArrayList(menuList.orderList));  //populates item in listview
         listPrice.set(FXCollections.observableArrayList(menuList.orderPrice));  //populates price of item in listview
     }
@@ -84,7 +95,7 @@ public class FastFoodController implements Initializable {
         menuList.addOrderItem("Cheese Steak");  //adds item to ArrayList
         menuList.addOrderPrice(10.25);  //adds price to ArrayList
         menuList.addComboNumber(4);  //adds item number to ArrayList
-        System.out.println("Cheese Steak");  //prints item to console
+        //System.out.println("Cheese Steak");  //prints item to console.  Now outputs to User Interface
         listProperty.set(FXCollections.observableArrayList(menuList.orderList));  //populates item in listview
         listPrice.set(FXCollections.observableArrayList(menuList.orderPrice));  //populates price of item in listview
     }
@@ -93,7 +104,7 @@ public class FastFoodController implements Initializable {
         menuList.addOrderItem("Chicken Cheese Steak");  //adds item to ArrayList
         menuList.addOrderPrice(10.50);  //adds price to ArrayList
         menuList.addComboNumber(5);  //adds item number to ArrayList
-        System.out.println("Chicken Cheese Steak");  //prints item to console
+        //System.out.println("Chicken Cheese Steak");  //prints item to console.  Now outputs to User Interface
         listProperty.set(FXCollections.observableArrayList(menuList.orderList));  //populates item in listview
         listPrice.set(FXCollections.observableArrayList(menuList.orderPrice));  //populates price of item in listview
     }
@@ -103,15 +114,22 @@ public class FastFoodController implements Initializable {
         menuList.addOrderItem("Veggie Burger");  //adds item to ArrayList
         menuList.addOrderPrice(8.50);  //adds price to ArrayList
         menuList.addComboNumber(6);  //adds item number to ArrayList
-        System.out.println("Veggie burger");  //prints item to console
+        //System.out.println("Veggie burger");  //prints item to console.  Now outputs to User Interface
         listProperty.set(FXCollections.observableArrayList(menuList.orderList));  //populates item in listview
         listPrice.set(FXCollections.observableArrayList(menuList.orderPrice));  //populates price of item in listview
     }
 
     public void btnCheckOut (ActionEvent e) throws IOException {  //Completes the customers order
-        menuList.printOrderList();  //prints completed order to console.
-        Platform.exit();
+        menuList.printOrderList();
 
+
+        Parent root = FXMLLoader.load(getClass().getResource("receipt.fxml"));
+
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setTitle("Receipt");
+        stage.setScene(scene);
+        stage.show();
 
     }
 
@@ -133,6 +151,10 @@ public class FastFoodController implements Initializable {
 
     }
 
+    public void btnClose(ActionEvent event) {
+        Platform.exit();
+    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -141,6 +163,24 @@ public class FastFoodController implements Initializable {
         lvOrderList.itemsProperty().bind(listProperty);  //displays item in list on the user interface
         lvOrderPrice.itemsProperty().bind(listPrice);  //displays price of item in list on the user interface
 
+
+       /** Reads output from Receipt.txt file and populates receipt window after the transaction has completed.
+        *
+       */
+        try {
+            // Create a buffered stream
+            Scanner input = new Scanner(new File("Receipt.txt"));
+
+            // Read a line and append the line to the text area
+            while (input.hasNext()) {
+                receiptTextArea.appendText(input.nextLine() + '\n');
+            }
+            input.close();
+        } catch (FileNotFoundException ex) {
+            System.out.println("File not found: " + "Receipt.txt");
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
 
     }
 
