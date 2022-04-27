@@ -1,9 +1,8 @@
-You have 6 items in your shopping cart.
-Your order number is: 287
+You have 5 items in your shopping cart.
+Your order number is: 375
 1. Hamburger
-2. Veggie Burger
+2. Chicken Tenders
 3. Cheese Steak
-4. Chicken Cheese Steak
-5. Hot Dog
-6. Chicken Tenders
-The total price of your order is:  $55.92
+4. Veggie Burger
+5. Chicken Cheese Steak
+The total price of your order is:  $49.56
